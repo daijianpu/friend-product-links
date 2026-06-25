@@ -1,5 +1,5 @@
 === Friend Product Links ===
-Contributors: friendproductlinks
+Contributors: eezz.net
 Tags: woocommerce, product feed, product links, friends
 Requires at least: 6.2
 Tested up to: 7.0
