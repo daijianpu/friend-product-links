@@ -1,0 +1,237 @@
+.fpl-module {
+	margin: 2rem 0;
+	clear: both;
+	--fpl-action-color: var(
+		--theme-primary-color,
+		var(
+			--theme-color,
+			var(
+				--primary-color,
+				var(
+					--accent-color,
+					var(
+						--woocommerce,
+						var(
+							--wc-primary,
+							var(
+								--wp--preset--color--vivid-red,
+								#f00000
+							)
+						)
+					)
+				)
+			)
+		)
+	);
+}
+
+.fpl-module-title {
+	margin: 0 0 1rem;
+}
+
+.fpl-core-friends-module .fpl-module-title {
+	text-align: center;
+}
+
+/* --- Product grid: responsive 4/3/2/1 --- */
+
+/* Fallback: viewport-based media queries for older browsers */
+.fpl-products-grid {
+	display: grid !important;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 1.25rem;
+	list-style: none !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	align-items: start;
+}
+
+.fpl-products-grid::before,
+.fpl-products-grid::after {
+	content: none !important;
+	display: none !important;
+}
+
+.fpl-products-grid > li {
+	display: block !important;
+	float: none !important;
+	clear: none !important;
+	justify-self: stretch !important;
+	align-self: start;
+	width: 100% !important;
+	max-width: none !important;
+	min-width: 0;
+	margin: 0 !important;
+	box-sizing: border-box;
+}
+
+@media (max-width: 1100px) {
+	.fpl-products-grid {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 780px) {
+	.fpl-products-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 520px) {
+	.fpl-products-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* Modern browsers: container-based responsive grid */
+@supports (container-type: inline-size) {
+	.fpl-module {
+		container-type: inline-size;
+	}
+
+	.fpl-module .fpl-products-grid {
+		grid-template-columns: 1fr;
+	}
+
+	@container (min-width: 520px) {
+		.fpl-module .fpl-products-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@container (min-width: 780px) {
+		.fpl-module .fpl-products-grid {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+	}
+
+	@container (min-width: 1100px) {
+		.fpl-module .fpl-products-grid {
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+		}
+	}
+}
+
+/* --- Card structure --- */
+
+.fpl-card {
+	min-width: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+/* Image must fill card width */
+.fpl-products-grid .fpl-image-link {
+	display: block !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	aspect-ratio: 1 / 1;
+	overflow: hidden;
+}
+
+.fpl-products-grid .fpl-image {
+	display: block !important;
+	width: 100% !important;
+	height: 100% !important;
+	max-width: 100% !important;
+	object-fit: cover;
+}
+
+/* Title clamping */
+.fpl-products-grid .fpl-product-title,
+.fpl-products-grid .fpl-exchange-product-title {
+	width: 100%;
+	max-width: 100%;
+	min-width: 0;
+	margin-top: 0.75rem;
+	margin-bottom: 0.3rem;
+	min-height: 2.8em;
+	line-height: 1.4;
+}
+
+.fpl-products-grid .fpl-product-title a,
+.fpl-products-grid .fpl-exchange-product-title a {
+	display: -webkit-box !important;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	max-height: 2.8em;
+	line-height: 1.4;
+	text-decoration: none;
+	word-break: normal !important;
+	overflow-wrap: normal !important;
+	hyphens: none;
+}
+
+/* --- Price: user-customizable CSS variables, scoped to FPL modules --- */
+
+body .fpl-module .fpl-product-price,
+body .fpl-module .fpl-exchange-price {
+	width: 100%;
+	max-width: 100%;
+	min-width: 0;
+	margin: 8px 0;
+	color: var(--fpl-price-color, var(--fpl-action-color, #f00000)) !important;
+	font-size: var(--fpl-price-font-size, 16px) !important;
+	font-weight: var(--fpl-price-font-weight, 700) !important;
+	line-height: 1.4 !important;
+}
+
+body .fpl-module .fpl-product-price .fpl-price-label,
+body .fpl-module .fpl-product-price .fpl-price-value,
+body .fpl-module .fpl-exchange-price .fpl-price-label,
+body .fpl-module .fpl-exchange-price .fpl-price-value {
+	color: inherit !important;
+	font-size: inherit !important;
+	font-weight: inherit !important;
+	line-height: inherit !important;
+}
+
+/* Source store name */
+.fpl-product-source,
+.fpl-exchange-source {
+	width: 100%;
+	max-width: 100%;
+	min-width: 0;
+	margin: 0.25rem 0 0.75rem;
+	font-size: 0.875em;
+	opacity: 0.75;
+}
+
+/* --- Button: user-customizable CSS variables, scoped to FPL modules --- */
+
+body .fpl-module .fpl-products-grid .fpl-product-button.button,
+body .fpl-module .fpl-products-grid .fpl-exchange-product-button.button,
+body .fpl-module a.fpl-product-button,
+body .fpl-module a.fpl-exchange-product-button {
+	background-color: var(--fpl-button-color, var(--fpl-action-color, #f00000)) !important;
+	border-color: var(--fpl-button-color, var(--fpl-action-color, #f00000)) !important;
+	color: var(--fpl-button-text-color, #ffffff) !important;
+	box-shadow: none !important;
+}
+
+body .fpl-module .fpl-products-grid .fpl-product-button.button:hover,
+body .fpl-module .fpl-products-grid .fpl-product-button.button:focus,
+body .fpl-module .fpl-products-grid .fpl-exchange-product-button.button:hover,
+body .fpl-module .fpl-products-grid .fpl-exchange-product-button.button:focus,
+body .fpl-module a.fpl-product-button:hover,
+body .fpl-module a.fpl-product-button:focus,
+body .fpl-module a.fpl-exchange-product-button:hover,
+body .fpl-module a.fpl-exchange-product-button:focus {
+	background-color: var(--fpl-button-hover-color, var(--fpl-button-color, var(--fpl-action-color, #f00000))) !important;
+	border-color: var(--fpl-button-hover-color, var(--fpl-button-color, var(--fpl-action-color, #f00000))) !important;
+	color: var(--fpl-button-text-color, #ffffff) !important;
+	box-shadow: none !important;
+}
+
+.fpl-product-button,
+.fpl-exchange-product-button {
+	margin-top: 10px;
+	text-decoration: none;
+	max-width: 100%;
+}
+
+/* Exchange Catalog */
+.fpl-exchange-catalog {
+	margin: 2rem 0;
+}
